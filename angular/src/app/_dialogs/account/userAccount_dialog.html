@@ -1,0 +1,18 @@
+<div mat-dialog-content>
+  <h1>Datos de tu Perfil:</h1>
+  <div class="row">
+    <div class="col-sm"><p><mat-icon class="iconos" color="primary">face</mat-icon>&nbsp;<b>Nombre:</b></p></div>
+    <div class="col-sm"><p>{{data['firstName']}} {{data['lastName']}}</p></div>
+  </div>
+  <div class="row">
+    <div class="col-sm"><p><mat-icon class="iconos" color="primary">email</mat-icon>&nbsp;<b>Email:</b></p></div>
+    <div class="col-sm"><p>{{data['email']}}</p></div>
+  </div>
+  <div class="row">
+    <div class="col-sm"><p><mat-icon class="iconos" color="primary">verified_user</mat-icon>&nbsp;<b>Perfil:</b></p></div>
+    <div class="col-sm"><p>{{data['role'][0]}}</p></div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Ok</button>
+</div>

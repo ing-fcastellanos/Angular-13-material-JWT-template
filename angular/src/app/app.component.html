@@ -1,0 +1,155 @@
+﻿<div class="app-container" [ngClass]="{ 'bg-light': account }">
+  <!-- main nav -->
+
+  <mat-sidenav-container class="mat-elevation-z8" fullscreen>
+    <mat-sidenav #snav>
+
+      <mat-toolbar class="innertoolbar">
+        <mat-toolbar-row color="primary">
+
+          <h2 class="mt-2"> Sistema Administración Excelo </h2>
+          <button mat-button style="margin-left: auto;" (click)="snav.toggle()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-toolbar-row>
+      </mat-toolbar>
+
+      <mat-selection-list [multiple]="false" *ngIf="account">
+
+        <!-- Inicio -->
+        <mat-list-option [value]="true" routerLink="/" routerLinkActive="active" (click)="snav.toggle()">
+          <div style="display: flow-root;">
+            <mat-icon color="warn">home</mat-icon>
+            <span style="vertical-align: super;">&nbsp;&nbsp; Inicio</span>
+          </div>
+        </mat-list-option>
+        <mat-divider class="mb-1"></mat-divider>
+
+        <!-- Menu Automatico -->
+        <div *ngFor="let modulo of listaModulos">
+          <div mat-subheader *ngIf="accesoFuncionalidad(modulo.accesoModulo, null)">{{modulo.name}}</div>
+          <div *ngFor="let funcion of modulo.accesos">
+            <mat-list-option [value]="true" routerLink="{{funcion.routerLink}}" routerLinkActive="active"
+              (click)="snav.toggle()" *ngIf="accesoFuncionalidad(funcion.regularAccess, funcion._id)">
+              <div style="display: flow-root;">
+                <mat-icon color="warn">{{funcion.icon}}</mat-icon>
+                <span style="vertical-align: super;">&nbsp;&nbsp; {{funcion.funcionalidad}}</span>
+              </div>
+            </mat-list-option>
+          </div>
+          <mat-divider class="mb-1" *ngIf="accesoFuncionalidad(modulo.accesoModulo, null)"></mat-divider>
+        </div>
+
+        <!-- Menu Logout -->
+        <div>
+          <mat-list-option [value]="true" (click)="logout()" (click)="snav.toggle()">
+            <div style="display: flow-root;">
+              <mat-icon color="warn">logout</mat-icon>
+              <span style="vertical-align: super;">&nbsp;&nbsp; Cerrar Sesión</span>
+            </div>
+          </mat-list-option>
+        </div>
+      </mat-selection-list>
+    </mat-sidenav>
+
+    <div class="page-wrap">
+      <header role="banner">
+        <mat-toolbar color="primary" class="mat-elevation-z1">
+          <mat-toolbar-row style="
+              min-height: 64px;
+              height: 80px;
+              padding-top: 0px;
+              padding-bottom: 0px;">
+            <button mat-icon-button (click)="snav.toggle()" class="ml-3" matTooltip="Menú de Opciones" *ngIf="account">
+              <mat-icon>menu</mat-icon>&nbsp;&nbsp;Menú
+            </button>
+
+            <span class="spacer"></span>
+
+            <div class="" *ngIf="account">
+
+              <!-- Menu de Notificaciones -->
+              <button mat-icon-button [matBadge]="getNotificacionesSinVer()" matBadgeColor="accent" matBadgePosition="before" [matMenuTriggerFor]="menu">
+                <mat-icon>notifications</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu" class="menuNotificaciones">
+                <mat-selection-list #notificacionesList [multiple]="false" (selectionChange)="notifComplete($event)">
+                  <div *ngFor="let notif of notifications" class="notification-card">
+                    <mat-list-option routerLink="{{notif.routerLink}}" routerLinkActive="active" [value]="notif._id">
+                      <mat-icon mat-list-icon [color]="notif.color">{{notif.icon}}</mat-icon>
+                      <div mat-line>{{notif.title}}</div>
+                      <div mat-line> {{ getTimeAgo(notif.created)}} </div>
+                    </mat-list-option>
+                    <mat-divider></mat-divider>
+                  </div>
+                  <mat-list-option *ngIf="getNotificacionesSinVer() === null">
+                    <mat-icon mat-list-icon color="primary">done</mat-icon>
+                    <div mat-line>Sin notificaciones</div>
+                  </mat-list-option>
+
+                </mat-selection-list>
+              </mat-menu>
+
+              <!-- Buton Logout -->
+              <button mat-icon-button (click)="logout()" class="nav-item nav-link mx-2" matTooltip="Cerrar Sesión">
+                <mat-icon>logout</mat-icon>
+              </button>
+            </div>
+          </mat-toolbar-row>
+        </mat-toolbar>
+
+        <mat-toolbar class="userbar" *ngIf="account">
+          <div class="row mx-2" style="width: 100%;">
+            <div class="col-sm mx-auto" style="font-size: small">
+              <p style="margin-top: 10px;">Bienvenido {{account.firstName + ' ' + account.lastName}}</p>
+            </div>
+            <div>
+              <app-menu style="vertical-align: text-top;" [options]="options | async"
+                (themeChange)="themeChangeHandler($event)">
+              </app-menu>
+            </div>
+            <div>
+              <button style="vertical-align: text-top;" mat-icon-button matTooltip="Datos del usuario"
+                (click)="showDatosUsuario()">
+                <mat-icon>account_circle</mat-icon>
+              </button>
+            </div>
+          </div>
+        </mat-toolbar>
+      </header>
+      <main class="content">
+        <!-- main router outlet -->
+        <router-outlet></router-outlet>
+
+        <!-- subnav router outlet -->
+        <router-outlet name="subnav"></router-outlet>
+      </main>
+
+      <div class="footer">
+        <mat-toolbar color="primary">
+          <mat-toolbar-row class="container" style="min-height: 64px; padding-bottom: 20px">
+            <div class="row footercontent">
+              <div class="col-sm">
+                <p class="mat-small">
+                  <a mat-button color="accent" class="pl-1 pr-1" routerLink="/aviso_privacidad"
+                    routerLinkActive="active" target="_blank">Aviso de Privacidad</a>
+                  |
+                  <a mat-flat-button color="primary" class="pl-1 pr-0">Copyright © {{getYear()}}. Todos los
+                    derechos
+                    reservados.</a>
+                </p>
+              </div>
+              <div class="col-sm text-right">
+                <p class="mat-small ml-auto text-end">
+                  <a mat-button color="accent" href="https://fcastellanos-info.web.app/" target="_blank">
+                    <mat-icon>code</mat-icon> by Francisco Castellanos
+                  </a>
+                </p>
+              </div>
+            </div>
+          </mat-toolbar-row>
+        </mat-toolbar>
+      </div>
+    </div>
+  </mat-sidenav-container>
+</div>

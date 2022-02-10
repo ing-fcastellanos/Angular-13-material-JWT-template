@@ -1,0 +1,18 @@
+<div mat-dialog-content>
+  <h1>{{data.titulo}}</h1>
+
+  <div *ngIf="data.contenido">
+    <p>{{data.contenido}}</p>
+  </div>
+
+  <div *ngIf="data.tabla">
+    <div class="row" *ngFor="let item of data.tabla" ngClass="mb-1">
+      <div class="col-sm"><b>{{item.param}}:</b></div>
+      <div class="col-sm">{{item.value}}</div>
+    </div>
+  </div>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Ok</button>
+</div>

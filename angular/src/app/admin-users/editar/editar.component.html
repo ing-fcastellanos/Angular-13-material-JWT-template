@@ -1,0 +1,73 @@
+<div class="container mt-4">
+  <h1 *ngIf="isAddMode">Crear una cuenta nueva</h1>
+  <h1 *ngIf="!isAddMode">Editar cuenta</h1>
+
+  <div class="form-row">
+    <div class="form-group col-6">
+      <mat-form-field appearance="fill" class="inputform">
+        <mat-label>Nombre(s)</mat-label>
+        <input matInput [(ngModel)]="userData.firstName" required>
+        <mat-error *ngIf="userData.firstName === ''">El nombre es requerido</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group col-6">
+      <mat-form-field appearance="fill" class="inputform">
+        <mat-label>Apellidos</mat-label>
+        <input matInput [(ngModel)]="userData.lastName" required>
+        <mat-error *ngIf="userData.lastName=== ''">Los apellidos son requeridos</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-6">
+      <mat-form-field appearance="fill" class="inputform">
+        <mat-label>Correo electónico</mat-label>
+        <input matInput [(ngModel)]="userData.email" required>
+        <mat-error *ngIf="userData.email=== ''">Email es requerido</mat-error>
+      </mat-form-field>
+      <span class="errorspan" *ngIf="isEmail()">El email no es valido</span>
+    </div>
+    <div class="form-group col">
+      <mat-form-field appearance="fill" class="inputform">
+        <mat-label>Perfil de Usuario</mat-label>
+        <mat-select [(ngModel)]="userData.role" required>
+          <mat-option *ngFor="let role of Roles" [value]="role.key">{{getUserFriendlyName(role.value)}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="userData.role === null">El perfil es requerido</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="!isAddMode">
+    <div class="col-sm text-center">
+      <p>Si desea mantener el mismo password, manten vacios los campos de contraseñas</p>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-6">
+      <mat-form-field appearance="fill" class="inputform">
+        <mat-label>Contraseña</mat-label>
+        <input type="password" matInput [(ngModel)]="userData.password" (required)="!isAddMode">
+        <mat-error *ngIf="userData.password=== ''">La contraseña es requerida</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group col-6">
+      <mat-form-field appearance="fill" class="inputform">
+        <mat-label>Confirmar Contraseña</mat-label>
+        <input type="password" matInput [(ngModel)]="userData.confirmPassword" (required)="!isAddMode">
+        <mat-error *ngIf="userData.confirmPassword === '' ">Confirmar contraseña es requerida</mat-error>
+      </mat-form-field>
+      <span class="errorspan" *ngIf="passMatch()">Las contraseñas deben coincidir</span>
+    </div>
+  </div>
+
+  <div class="form-group text-center">
+    <button mat-raised-button color="primary" [disabled]="!isFormValid()" (click)="onSubmit()">
+      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+      Guardar
+    </button>
+    <a routerLink="/admin_users" class="btn btn-link">Cancelar</a>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+.errorSnackbar{
+  background: darkred;
+
+  button{
+    color: aliceblue;
+  }
+}
+
+.successnackbar{
+  background: green;
+
+  button{
+    color: aliceblue;
+  }
+}
+
+.infoSnackbar{
+  background: blue;
+
+  button{
+    color: aliceblue;
+  }
+}
+
+.warnSnackbar{
+  background: chocolate;
+
+  button{
+    color: black;
+  }
+}

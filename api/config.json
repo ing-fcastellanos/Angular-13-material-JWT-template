@@ -1,0 +1,28 @@
+﻿{
+  "DEV": {
+    "connectionString": "mongodb://localhost/localDB",
+    "secret": "algomuysecreto",
+    "emailFrom": "info_testing@app.com",
+    "smtpOptions": {
+      "host": "smtp.sendgrid.net",
+      "port": 587,
+      "auth": {
+        "user": "apikey",
+        "pass": "add-your-api-key"
+      }
+    }
+  },
+  "PROD": {
+    "connectionString": "add-production-DB",
+    "secret": "algomuysecreto",
+    "emailFrom": "info@app.com",
+    "smtpOptions": {
+      "host": "smtp.sendgrid.net",
+      "port": 587,
+      "auth": {
+        "user": "apikey",
+        "pass": "add-your-api-key"
+      }
+    }
+  }
+}

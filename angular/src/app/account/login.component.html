@@ -1,0 +1,47 @@
+﻿<div class="container">
+  <div class="row">
+    <div class="col-sm text-center mt-5">
+      <h1>Acceso a la aplicación</h1>
+    </div>
+  </div>
+  <div class="row justify-content-center mt-3">
+    <div class="col-4 mt-5" >
+      <img src="assets/sherwin_logo.jpg" class="img-fluid" alt="">
+    </div>
+    <div class="col-4">
+      <mat-card class="mb-5">
+        <mat-card-title class="text-center mt-3">Ingresa tus credenciales de acceso:</mat-card-title>
+        <mat-card-content >
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div>
+              <mat-form-field appearance="fill" class="inputform mt-3">
+                <mat-label>Correo Electrónico</mat-label>
+                <input  matInput formControlName="email" required>
+                <mat-error *ngIf="f.email.errors&&f.email.errors.required">Email es requerido</mat-error>
+                <mat-error *ngIf="f.email.errors&&f.email.errors.email">Email es invalido</mat-error>
+              </mat-form-field>
+            </div>
+          </form>
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div>
+              <mat-form-field appearance="fill" class="inputform mt-3">
+                <mat-label>Contraseña</mat-label>
+                <input type="password" matInput formControlName="password" required>
+                <mat-error *ngIf="f.password.errors">Contraseña es requerida</mat-error>
+              </mat-form-field>
+            </div>
+          </form>
+        </mat-card-content>
+        <mat-card-actions>
+          <div class="text-center mb-2">
+            <button type="button" mat-raised-button class="mr-1" (click)="sendToRecover()">Recuperar contraseña</button>
+            <button mat-raised-button color="primary" [disabled]="loading" (click)="onSubmit()">Ingresar</button>
+          </div>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+
+

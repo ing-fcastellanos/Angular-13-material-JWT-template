@@ -1,0 +1,47 @@
+.container {
+  padding: 8px 24px 108px 24px;
+  min-height: 80vh;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.subtituloNotificacion {
+  margin-bottom: 0px;
+}
+
+.mat-checkbox-label {
+  white-space: normal;
+}
+
+mat-sidenav {
+  margin: 10px;
+  width: 40%;
+  min-width: 340px;
+  max-width: 500px;
+}
+
+.footer {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  text-align: center;
+  height: 60px;
+  line-height: 60px;
+}
+
+.userbar {
+  height: 5rem;
+}
+
+.footercontent {
+  width: 100%;
+  padding-top: 20px;
+}
+
+.mat-badge-content {
+  right: 0rem;
+}
+
