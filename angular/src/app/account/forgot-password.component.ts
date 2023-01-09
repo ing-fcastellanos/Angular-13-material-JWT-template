@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { first, finalize } from 'rxjs/operators';
 
 import { AccountService, AlertService } from '@app/_services';
@@ -9,12 +9,12 @@ import { AccountService, AlertService } from '@app/_services';
   styleUrls: ['login.component.css']
 })
 export class ForgotPasswordComponent implements OnInit {
-  form: FormGroup;
+  form: UntypedFormGroup;
   loading = false;
   submitted = false;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private accountService: AccountService,
     private alertService: AlertService
   ) { }

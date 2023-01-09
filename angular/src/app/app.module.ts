@@ -29,40 +29,39 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';;
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    AppRoutingModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatMenuModule,
-    MatListModule,
-    MatDialogModule,
-    MatSnackBarModule,
-    MatBadgeModule,
-    BrowserAnimationsModule
-  ],
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    DialogsComponent,
-    MenuComponent,
-    ConfirmDialog,
-    displayDataDialog,
-    userAccount_dialog,
-    AlertComponent,
-    AvisoprivacidadComponent
-  ],
-  providers: [
-    { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AccountService, NotificacionesService] },
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    ThemeService, StyleManagerService
-  ],
-  bootstrap: [AppComponent],
-  entryComponents: [AlertComponent]
+    imports: [
+        BrowserModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        AppRoutingModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        MatSidenavModule,
+        MatMenuModule,
+        MatListModule,
+        MatDialogModule,
+        MatSnackBarModule,
+        MatBadgeModule,
+        BrowserAnimationsModule
+    ],
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        DialogsComponent,
+        MenuComponent,
+        ConfirmDialog,
+        displayDataDialog,
+        userAccount_dialog,
+        AlertComponent,
+        AvisoprivacidadComponent
+    ],
+    providers: [
+        { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AccountService, NotificacionesService] },
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        ThemeService, StyleManagerService
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
