@@ -12,7 +12,9 @@ switch (process.env.NODE_ENV) {
 console.log('Conectando a MongoDB: ', currentConfig.connectionString);
 const connectionOptions = { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false };
 mongoose.connect(process.env.MONGODB_URI || currentConfig.connectionString, connectionOptions).then(result => {
-    //console.log(result);
+    console.log(result);
+}).catch(err => {
+        console.log(err);
 });
 mongoose.Promise = global.Promise;
 

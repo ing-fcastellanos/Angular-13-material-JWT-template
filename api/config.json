@@ -1,6 +1,6 @@
 ﻿{
   "DEV": {
-    "connectionString": "mongodb://localhost/localDB",
+    "connectionString": "mongodb://localhost/exceloApp",
     "secret": "algomuysecreto",
     "emailFrom": "info_testing@app.com",
     "smtpOptions": {
